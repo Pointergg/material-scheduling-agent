@@ -1,0 +1,15 @@
+{
+  "started_at": "2026-10-29T15:07:00+08:00",
+  "recorded_at": "2026-10-29T15:36:53.898731+08:00",
+  "elapsed_minutes_approx": 29.9,
+  "scope": "AI-assisted implementation and local validation window; not candidate independent work time",
+  "verification": {
+    "unit_tests": 44,
+    "offline_cases": 15,
+    "live_cases": 15
+  },
+  "remaining": [
+    "GitHub authentication and upload",
+    "candidate personal review and numeric question identifier"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "command": "python -m scripts.verify",
+  "test_command_equivalent": "python -m unittest discover -s tests -v",
+  "executed_at_utc": "2026-10-29T07:35:37.478192+00:00",
+  "python": "3.12.14",
+  "platform": "Windows",
+  "tests_run": 44,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "successful": true,
+  "elapsed_seconds": 2.621
+}

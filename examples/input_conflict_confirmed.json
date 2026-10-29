@@ -1,0 +1,10 @@
+{
+  "request_id": "req-conflict",
+  "material_id": "M01",
+  "date": "2026-11-01",
+  "required_time": "18:00",
+  "approval": {
+    "approved_time": "19:00",
+    "proposal_id": "proposal-2cf918c6a9a52cb7d78a6d69"
+  }
+}

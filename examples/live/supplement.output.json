@@ -1,0 +1,255 @@
+{
+  "scenario": "supplement",
+  "request": {
+    "request_id": "eval-normal",
+    "material_id": "M05",
+    "date": "2026-11-02",
+    "required_time": "18:00"
+  },
+  "initial_occupied_override": null,
+  "save_failure_injected": false,
+  "repeat_count": 1,
+  "mutate_occupancy_after_first": false,
+  "expected": {
+    "run_status": "completed",
+    "review_status": "passed",
+    "draft_count": 1
+  },
+  "actual_runs": [
+    {
+      "schema_version": "1.0",
+      "mode": "live_model",
+      "model": "deepseek-flash",
+      "request": {
+        "request_id": "eval-normal",
+        "material_id": "M05",
+        "date": "2026-11-02",
+        "required_time": "18:00",
+        "channel": "main",
+        "timezone": "Asia/Shanghai",
+        "approval": null
+      },
+      "result": {
+        "material_id": "M05",
+        "run_status": "completed",
+        "review_status": "passed",
+        "risk_reasons": [],
+        "requested_time": "18:00",
+        "suggested_time": "18:00",
+        "scheduled_time": "18:00",
+        "confirmation_status": "not_required",
+        "scheduling_conflicts": [],
+        "pending_items": [],
+        "draft_status": "saved",
+        "draft_id": "draft-a216a2f784a8e4064440",
+        "published": false,
+        "message": "草稿已保存或幂等复用；没有发布任何内容。",
+        "errors": []
+      },
+      "execution": {
+        "steps": 7,
+        "max_steps": 12,
+        "stop_reason": "finished",
+        "usage": {
+          "prompt_tokens": 15443,
+          "completion_tokens": 368,
+          "total_tokens": 15811
+        }
+      },
+      "trace": [
+        {
+          "step": 1,
+          "action": "read_material",
+          "tool_params": {
+            "material_id": "M05"
+          },
+          "decision_basis": "先读取素材 M05 元数据以进行审核",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "material_id": "M05",
+              "metadata": {
+                "status": "ready",
+                "content_type": "video",
+                "license": "",
+                "sensitive_topics": [],
+                "title": ""
+              }
+            }
+          },
+          "next_action": "check_rules"
+        },
+        {
+          "step": 2,
+          "action": "check_rules",
+          "tool_params": {
+            "material_id": "M05"
+          },
+          "decision_basis": "素材元数据已读取，按业务规则审核",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "status": "missing_information",
+              "missing_fields": [
+                "title",
+                "license"
+              ],
+              "risks": [
+                {
+                  "code": "missing_metadata",
+                  "severity": "missing",
+                  "message": "缺少字段：title, license"
+                }
+              ],
+              "rules_version": "2026-10-29-demo-v1"
+            }
+          },
+          "next_action": "lookup_metadata"
+        },
+        {
+          "step": 3,
+          "action": "lookup_metadata",
+          "tool_params": {
+            "material_id": "M05"
+          },
+          "decision_basis": "审核缺 title 与 license，先从补充资料库补查",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "source": "local_metadata_catalog",
+              "found_fields": [
+                "license",
+                "title"
+              ],
+              "metadata": {
+                "status": "ready",
+                "content_type": "video",
+                "license": "cleared",
+                "sensitive_topics": [],
+                "title": "补齐资料的活动预告"
+              },
+              "review_invalidated": true
+            }
+          },
+          "next_action": "check_rules"
+        },
+        {
+          "step": 4,
+          "action": "check_rules",
+          "tool_params": {
+            "material_id": "M05"
+          },
+          "decision_basis": "补查后 review_invalidated=true，重新审核",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "status": "passed",
+              "missing_fields": [],
+              "risks": [],
+              "rules_version": "2026-10-29-demo-v1"
+            }
+          },
+          "next_action": "query_slots"
+        },
+        {
+          "step": 5,
+          "action": "query_slots",
+          "tool_params": {
+            "material_id": "M05"
+          },
+          "decision_basis": "审核通过，查询 2026-11-02 18:00 时段占用与已有草稿",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "requested_time": "18:00",
+              "requested_available": true,
+              "available_slots": [
+                "18:00",
+                "19:00",
+                "20:00"
+              ],
+              "externally_occupied": [],
+              "draft_reservations": [],
+              "existing_draft": null,
+              "existing_conflict": false
+            }
+          },
+          "next_action": "save_draft"
+        },
+        {
+          "step": 6,
+          "action": "save_draft",
+          "tool_params": {
+            "material_id": "M05",
+            "slot": "18:00"
+          },
+          "decision_basis": "审核通过且原时段 18:00 可用、无草稿冲突，保存草稿",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "status": "saved",
+              "saved": true,
+              "draft": {
+                "request_id": "eval-normal",
+                "material_id": "M05",
+                "date": "2026-11-02",
+                "required_time": "18:00",
+                "channel": "main",
+                "timezone": "Asia/Shanghai",
+                "draft_id": "draft-a216a2f784a8e4064440",
+                "scheduled_time": "18:00",
+                "status": "draft",
+                "published": false,
+                "approval": null,
+                "fingerprint": "fcd7e569373baae784c7f17153de0d2164d7d836baaf085f6efbed2c8768a90c"
+              }
+            }
+          },
+          "next_action": "finish"
+        },
+        {
+          "step": 7,
+          "action": "finish",
+          "tool_params": {
+            "material_id": "M05"
+          },
+          "decision_basis": "补查补齐 title/license 后审核通过，18:00 可用且草稿已保存（draft-a216a2f784a8e4064440），未发布",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "status": "completed",
+              "published": false
+            }
+          },
+          "next_action": null
+        }
+      ]
+    }
+  ],
+  "database_row_counts_before": [
+    0
+  ],
+  "database_rows_after": [
+    {
+      "request_id": "eval-normal",
+      "material_id": "M05",
+      "date": "2026-11-02",
+      "required_time": "18:00",
+      "channel": "main",
+      "timezone": "Asia/Shanghai",
+      "draft_id": "draft-a216a2f784a8e4064440",
+      "scheduled_time": "18:00",
+      "status": "draft",
+      "published": false,
+      "approval": null,
+      "fingerprint": "fcd7e569373baae784c7f17153de0d2164d7d836baaf085f6efbed2c8768a90c"
+    }
+  ],
+  "checks": {
+    "run_status": true,
+    "review_status": true,
+    "draft_count": true,
+    "not_published": true
+  },
+  "passed": true
+}

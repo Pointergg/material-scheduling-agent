@@ -1,0 +1,181 @@
+{
+  "scenario": "no_slots",
+  "request": {
+    "request_id": "eval-normal",
+    "material_id": "M01",
+    "date": "2026-11-02",
+    "required_time": "18:00"
+  },
+  "initial_occupied_override": [
+    "18:00",
+    "19:00",
+    "20:00"
+  ],
+  "save_failure_injected": false,
+  "repeat_count": 1,
+  "mutate_occupancy_after_first": false,
+  "expected": {
+    "run_status": "blocked",
+    "draft_count": 0
+  },
+  "actual_runs": [
+    {
+      "schema_version": "1.0",
+      "mode": "live_model",
+      "model": "deepseek-flash",
+      "request": {
+        "request_id": "eval-normal",
+        "material_id": "M01",
+        "date": "2026-11-02",
+        "required_time": "18:00",
+        "channel": "main",
+        "timezone": "Asia/Shanghai",
+        "approval": null
+      },
+      "result": {
+        "material_id": "M01",
+        "run_status": "blocked",
+        "review_status": "passed",
+        "risk_reasons": [],
+        "requested_time": "18:00",
+        "suggested_time": null,
+        "scheduled_time": null,
+        "confirmation_status": "not_required",
+        "scheduling_conflicts": [
+          {
+            "code": "requested_time_unavailable",
+            "time": "18:00",
+            "available_slots": [],
+            "message": "原要求时段不可用；任何替代时段都需要具体授权"
+          }
+        ],
+        "pending_items": [],
+        "draft_status": "not_saved",
+        "draft_id": null,
+        "published": false,
+        "message": "处理被阻断，请检查风险、冲突或工具错误；未发布。",
+        "errors": []
+      },
+      "execution": {
+        "steps": 5,
+        "max_steps": 12,
+        "stop_reason": "finished",
+        "usage": {
+          "prompt_tokens": 9404,
+          "completion_tokens": 256,
+          "total_tokens": 9660
+        }
+      },
+      "trace": [
+        {
+          "step": 1,
+          "action": "read_material",
+          "tool_params": {
+            "material_id": "M01"
+          },
+          "decision_basis": "先读取素材元数据以开始审核",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "material_id": "M01",
+              "metadata": {
+                "status": "ready",
+                "content_type": "video",
+                "license": "cleared",
+                "sensitive_topics": [],
+                "title": "新品短视频"
+              }
+            }
+          },
+          "next_action": "check_rules"
+        },
+        {
+          "step": 2,
+          "action": "check_rules",
+          "tool_params": {
+            "material_id": "M01"
+          },
+          "decision_basis": "素材元数据完整，按业务规则审核",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "status": "passed",
+              "missing_fields": [],
+              "risks": [],
+              "rules_version": "2026-10-29-demo-v1"
+            }
+          },
+          "next_action": "query_slots"
+        },
+        {
+          "step": 3,
+          "action": "query_slots",
+          "tool_params": {
+            "material_id": "M01"
+          },
+          "decision_basis": "审核通过，查询 2026-11-02 18:00 主渠道时段占用与草稿",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "requested_time": "18:00",
+              "requested_available": false,
+              "available_slots": [],
+              "externally_occupied": [
+                "18:00",
+                "19:00",
+                "20:00"
+              ],
+              "draft_reservations": [],
+              "existing_draft": null,
+              "existing_conflict": false
+            }
+          },
+          "next_action": "block"
+        },
+        {
+          "step": 4,
+          "action": "block",
+          "tool_params": {
+            "material_id": "M01"
+          },
+          "decision_basis": "2026-11-02 主渠道 18:00、19:00、20:00 均被外部占用且无其他可用时段，无法排期。",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "status": "blocked",
+              "risk_reasons": [],
+              "errors": []
+            }
+          },
+          "next_action": "finish"
+        },
+        {
+          "step": 5,
+          "action": "finish",
+          "tool_params": {
+            "material_id": "M01"
+          },
+          "decision_basis": "审核通过但 2026-11-02 主渠道无可用时段，已阻断，未保存草稿。",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "status": "blocked",
+              "published": false
+            }
+          },
+          "next_action": null
+        }
+      ]
+    }
+  ],
+  "database_row_counts_before": [
+    0
+  ],
+  "database_rows_after": [],
+  "checks": {
+    "run_status": true,
+    "draft_count": true,
+    "not_published": true
+  },
+  "passed": true
+}

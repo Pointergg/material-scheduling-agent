@@ -1,0 +1,112 @@
+{
+  "scenario": "step_limit",
+  "request": {
+    "request_id": "eval-normal",
+    "material_id": "M01",
+    "date": "2026-11-02",
+    "required_time": "18:00"
+  },
+  "initial_occupied_override": null,
+  "save_failure_injected": false,
+  "repeat_count": 1,
+  "mutate_occupancy_after_first": false,
+  "expected": {
+    "run_status": "incomplete",
+    "draft_count": 0
+  },
+  "actual_runs": [
+    {
+      "schema_version": "1.0",
+      "mode": "live_model",
+      "model": "deepseek-flash",
+      "request": {
+        "request_id": "eval-normal",
+        "material_id": "M01",
+        "date": "2026-11-02",
+        "required_time": "18:00",
+        "channel": "main",
+        "timezone": "Asia/Shanghai",
+        "approval": null
+      },
+      "result": {
+        "material_id": "M01",
+        "run_status": "incomplete",
+        "review_status": "passed",
+        "risk_reasons": [],
+        "requested_time": "18:00",
+        "suggested_time": null,
+        "scheduled_time": null,
+        "confirmation_status": "not_required",
+        "scheduling_conflicts": [],
+        "pending_items": [],
+        "draft_status": "not_saved",
+        "draft_id": null,
+        "published": false,
+        "message": "未完成：达到最大执行步数。请同时查看草稿状态，确认是否已有落盘副作用。",
+        "errors": []
+      },
+      "execution": {
+        "steps": 2,
+        "max_steps": 2,
+        "stop_reason": "step_limit",
+        "usage": {
+          "prompt_tokens": 2910,
+          "completion_tokens": 82,
+          "total_tokens": 2992
+        }
+      },
+      "trace": [
+        {
+          "step": 1,
+          "action": "read_material",
+          "tool_params": {
+            "material_id": "M01"
+          },
+          "decision_basis": "先读取素材元数据以开始审核。",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "material_id": "M01",
+              "metadata": {
+                "status": "ready",
+                "content_type": "video",
+                "license": "cleared",
+                "sensitive_topics": [],
+                "title": "新品短视频"
+              }
+            }
+          },
+          "next_action": "check_rules"
+        },
+        {
+          "step": 2,
+          "action": "check_rules",
+          "tool_params": {
+            "material_id": "M01"
+          },
+          "decision_basis": "素材元数据已读取，按业务规则审核。",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "status": "passed",
+              "missing_fields": [],
+              "risks": [],
+              "rules_version": "2026-10-29-demo-v1"
+            }
+          },
+          "next_action": null
+        }
+      ]
+    }
+  ],
+  "database_row_counts_before": [
+    0
+  ],
+  "database_rows_after": [],
+  "checks": {
+    "run_status": true,
+    "draft_count": true,
+    "not_published": true
+  },
+  "passed": true
+}

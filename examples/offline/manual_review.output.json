@@ -1,0 +1,173 @@
+{
+  "scenario": "manual_review",
+  "request": {
+    "request_id": "eval-normal",
+    "material_id": "M06",
+    "date": "2026-11-02",
+    "required_time": "18:00"
+  },
+  "initial_occupied_override": null,
+  "save_failure_injected": false,
+  "repeat_count": 1,
+  "mutate_occupancy_after_first": false,
+  "expected": {
+    "run_status": "waiting_information",
+    "review_status": "needs_review",
+    "draft_count": 0
+  },
+  "actual_runs": [
+    {
+      "schema_version": "1.0",
+      "mode": "offline_mock",
+      "model": "deterministic-test-double",
+      "request": {
+        "request_id": "eval-normal",
+        "material_id": "M06",
+        "date": "2026-11-02",
+        "required_time": "18:00",
+        "channel": "main",
+        "timezone": "Asia/Shanghai",
+        "approval": null
+      },
+      "result": {
+        "material_id": "M06",
+        "run_status": "waiting_information",
+        "review_status": "needs_review",
+        "risk_reasons": [
+          {
+            "code": "brand_review",
+            "severity": "review",
+            "message": "品牌合作表述需负责人复核"
+          }
+        ],
+        "requested_time": "18:00",
+        "suggested_time": null,
+        "scheduled_time": null,
+        "confirmation_status": "not_required",
+        "scheduling_conflicts": [],
+        "pending_items": [
+          {
+            "type": "metadata_or_review",
+            "items": [
+              {
+                "code": "brand_review",
+                "severity": "review",
+                "message": "品牌合作表述需负责人复核"
+              }
+            ]
+          }
+        ],
+        "draft_status": "not_saved",
+        "draft_id": null,
+        "published": false,
+        "message": "需要补充资料或人工复核；未保存。",
+        "errors": []
+      },
+      "execution": {
+        "steps": 4,
+        "max_steps": 12,
+        "stop_reason": "finished",
+        "usage": {}
+      },
+      "trace": [
+        {
+          "step": 1,
+          "action": "read_material",
+          "tool_params": {
+            "material_id": "M06"
+          },
+          "decision_basis": "先获取素材元数据",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "material_id": "M06",
+              "metadata": {
+                "status": "ready",
+                "content_type": "video",
+                "license": "cleared",
+                "sensitive_topics": [
+                  "brand_review"
+                ],
+                "title": "合作品牌内容"
+              }
+            }
+          },
+          "next_action": "check_rules"
+        },
+        {
+          "step": 2,
+          "action": "check_rules",
+          "tool_params": {
+            "material_id": "M06"
+          },
+          "decision_basis": "按规则核验元数据",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "status": "needs_review",
+              "missing_fields": [],
+              "risks": [
+                {
+                  "code": "brand_review",
+                  "severity": "review",
+                  "message": "品牌合作表述需负责人复核"
+                }
+              ],
+              "rules_version": "2026-10-29-demo-v1"
+            }
+          },
+          "next_action": "request_information"
+        },
+        {
+          "step": 3,
+          "action": "request_information",
+          "tool_params": {
+            "material_id": "M06"
+          },
+          "decision_basis": "需要人工复核风险",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "status": "waiting_information",
+              "required_items": [
+                {
+                  "code": "brand_review",
+                  "severity": "review",
+                  "message": "品牌合作表述需负责人复核"
+                }
+              ]
+            }
+          },
+          "next_action": "finish"
+        },
+        {
+          "step": 4,
+          "action": "finish",
+          "tool_params": {
+            "material_id": "M06"
+          },
+          "decision_basis": "本轮已有明确结果",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "status": "waiting_information",
+              "published": false
+            }
+          },
+          "next_action": null
+        }
+      ]
+    }
+  ],
+  "database_row_counts_before": [
+    0
+  ],
+  "database_rows_after": [],
+  "checks": {
+    "run_status": true,
+    "review_status": true,
+    "draft_count": true,
+    "not_published": true
+  },
+  "passed": true
+}

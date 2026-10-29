@@ -1,0 +1,49 @@
+test_approval_does_not_transfer_to_new_slot (test_agent.AgentTests.test_approval_does_not_transfer_to_new_slot) ... ok
+test_blocking_risk_cannot_be_overridden_by_time_approval (test_agent.AgentTests.test_blocking_risk_cannot_be_overridden_by_time_approval) ... ok
+test_changed_occupancy_rechecks_existing_draft (test_agent.AgentTests.test_changed_occupancy_rechecks_existing_draft) ... ok
+test_concurrent_competing_materials_cannot_double_book (test_agent.AgentTests.test_concurrent_competing_materials_cannot_double_book) ... ok
+test_concurrent_duplicate_saves (test_agent.AgentTests.test_concurrent_duplicate_saves) ... ok
+test_confirmation_bound_to_request (test_agent.AgentTests.test_confirmation_bound_to_request) ... ok
+test_conflict_requires_exact_confirmation (test_agent.AgentTests.test_conflict_requires_exact_confirmation) ... ok
+test_draft_reserves_slot_for_other_materials (test_agent.AgentTests.test_draft_reserves_slot_for_other_materials) ... ok
+test_duplicate_only_one_row_and_same_id (test_agent.AgentTests.test_duplicate_only_one_row_and_same_id) ... ok
+test_empty_lookup_preserves_missing_evidence (test_agent.AgentTests.test_empty_lookup_preserves_missing_evidence) ... ok
+test_generic_confirmed_boolean_rejected (test_agent.AgentTests.test_generic_confirmed_boolean_rejected) ... ok
+test_idempotency_key_reuse_rejected (test_agent.AgentTests.test_idempotency_key_reuse_rejected) ... ok
+test_invalid_inputs (test_agent.AgentTests.test_invalid_inputs) ... ok
+test_limit_after_commit_preserves_save_fact (test_agent.AgentTests.test_limit_after_commit_preserves_save_fact) ... ok
+test_manual_review_required (test_agent.AgentTests.test_manual_review_required) ... ok
+test_metadata_lookup_can_recover (test_agent.AgentTests.test_metadata_lookup_can_recover) ... ok
+test_metadata_prompt_injection_is_data (test_agent.AgentTests.test_metadata_prompt_injection_is_data) ... ok
+test_missing_information_cannot_be_mislabeled_terminal_block (test_agent.AgentTests.test_missing_information_cannot_be_mislabeled_terminal_block) ... ok
+test_missing_metadata_lookup_then_wait (test_agent.AgentTests.test_missing_metadata_lookup_then_wait) ... ok
+test_model_cannot_forge_approval (test_agent.AgentTests.test_model_cannot_forge_approval) ... ok
+test_model_cannot_skip_review (test_agent.AgentTests.test_model_cannot_skip_review) ... ok
+test_model_failure_is_not_mock_success (test_agent.AgentTests.test_model_failure_is_not_mock_success) ... ok
+test_new_key_cannot_duplicate_same_material (test_agent.AgentTests.test_new_key_cannot_duplicate_same_material) ... ok
+test_no_available_slots (test_agent.AgentTests.test_no_available_slots) ... ok
+test_no_publish_tool (test_agent.AgentTests.test_no_publish_tool) ... ok
+test_normal (test_agent.AgentTests.test_normal) ... ok
+test_save_time_recheck_catches_external_change (test_agent.AgentTests.test_save_time_recheck_catches_external_change) ... ok
+test_save_time_recheck_catches_new_risk (test_agent.AgentTests.test_save_time_recheck_catches_new_risk) ... ok
+test_saved_approval_is_auditable_when_original_request_repeated (test_agent.AgentTests.test_saved_approval_is_auditable_when_original_request_repeated) ... ok
+test_step_limit_is_incomplete (test_agent.AgentTests.test_step_limit_is_incomplete) ... ok
+test_storage_failure_rolls_back_insert (test_agent.AgentTests.test_storage_failure_rolls_back_insert) ... ok
+test_trace_contains_observation_and_actual_next_action (test_agent.AgentTests.test_trace_contains_observation_and_actual_next_action) ... ok
+test_unknown_material (test_agent.AgentTests.test_unknown_material) ... ok
+test_whitespace_title_is_missing (test_agent.AgentTests.test_whitespace_title_is_missing) ... ok
+test_batch_no_double_booking (test_cli.CLITests.test_batch_no_double_booking) ... ok
+test_cli_save_failure_nonzero_exit (test_cli.CLITests.test_cli_save_failure_nonzero_exit) ... ok
+test_cli_saves_output_and_json_stdout (test_cli.CLITests.test_cli_saves_output_and_json_stdout) ... ok
+test_content_only_success_claim_is_rejected (test_planner.PlannerTests.test_content_only_success_claim_is_rejected) ... ok
+test_http_endpoint_rejected (test_planner.PlannerTests.test_http_endpoint_rejected) ... ok
+test_http_error_does_not_log_key_or_response (test_planner.PlannerTests.test_http_error_does_not_log_key_or_response) ... ok
+test_malformed_arguments_rejected (test_planner.PlannerTests.test_malformed_arguments_rejected) ... ok
+test_multiple_tools_rejected (test_planner.PlannerTests.test_multiple_tools_rejected) ... ok
+test_timeout_is_explicit_failure (test_planner.PlannerTests.test_timeout_is_explicit_failure) ... ok
+test_tool_observation_protocol_and_usage (test_planner.PlannerTests.test_tool_observation_protocol_and_usage) ... ok
+
+----------------------------------------------------------------------
+Ran 44 tests in 2.161s
+
+OK

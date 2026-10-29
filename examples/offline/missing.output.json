@@ -1,0 +1,197 @@
+{
+  "scenario": "missing",
+  "request": {
+    "request_id": "eval-normal",
+    "material_id": "M02",
+    "date": "2026-11-02",
+    "required_time": "18:00"
+  },
+  "initial_occupied_override": null,
+  "save_failure_injected": false,
+  "repeat_count": 1,
+  "mutate_occupancy_after_first": false,
+  "expected": {
+    "run_status": "waiting_information",
+    "review_status": "missing_information",
+    "draft_count": 0
+  },
+  "actual_runs": [
+    {
+      "schema_version": "1.0",
+      "mode": "offline_mock",
+      "model": "deterministic-test-double",
+      "request": {
+        "request_id": "eval-normal",
+        "material_id": "M02",
+        "date": "2026-11-02",
+        "required_time": "18:00",
+        "channel": "main",
+        "timezone": "Asia/Shanghai",
+        "approval": null
+      },
+      "result": {
+        "material_id": "M02",
+        "run_status": "waiting_information",
+        "review_status": "missing_information",
+        "risk_reasons": [
+          {
+            "code": "missing_metadata",
+            "severity": "missing",
+            "message": "缺少字段：title"
+          }
+        ],
+        "requested_time": "18:00",
+        "suggested_time": null,
+        "scheduled_time": null,
+        "confirmation_status": "not_required",
+        "scheduling_conflicts": [],
+        "pending_items": [
+          {
+            "type": "metadata_or_review",
+            "items": [
+              {
+                "code": "missing_metadata",
+                "severity": "missing",
+                "message": "缺少字段：title"
+              }
+            ]
+          }
+        ],
+        "draft_status": "not_saved",
+        "draft_id": null,
+        "published": false,
+        "message": "需要补充资料或人工复核；未保存。",
+        "errors": []
+      },
+      "execution": {
+        "steps": 5,
+        "max_steps": 12,
+        "stop_reason": "finished",
+        "usage": {}
+      },
+      "trace": [
+        {
+          "step": 1,
+          "action": "read_material",
+          "tool_params": {
+            "material_id": "M02"
+          },
+          "decision_basis": "先获取素材元数据",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "material_id": "M02",
+              "metadata": {
+                "status": "ready",
+                "content_type": "video",
+                "license": "cleared",
+                "sensitive_topics": [],
+                "title": ""
+              }
+            }
+          },
+          "next_action": "check_rules"
+        },
+        {
+          "step": 2,
+          "action": "check_rules",
+          "tool_params": {
+            "material_id": "M02"
+          },
+          "decision_basis": "按规则核验元数据",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "status": "missing_information",
+              "missing_fields": [
+                "title"
+              ],
+              "risks": [
+                {
+                  "code": "missing_metadata",
+                  "severity": "missing",
+                  "message": "缺少字段：title"
+                }
+              ],
+              "rules_version": "2026-10-29-demo-v1"
+            }
+          },
+          "next_action": "lookup_metadata"
+        },
+        {
+          "step": 3,
+          "action": "lookup_metadata",
+          "tool_params": {
+            "material_id": "M02"
+          },
+          "decision_basis": "缺少必填信息，查询补充库",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "source": "local_metadata_catalog",
+              "found_fields": [],
+              "metadata": {
+                "status": "ready",
+                "content_type": "video",
+                "license": "cleared",
+                "sensitive_topics": [],
+                "title": ""
+              },
+              "review_invalidated": false
+            }
+          },
+          "next_action": "request_information"
+        },
+        {
+          "step": 4,
+          "action": "request_information",
+          "tool_params": {
+            "material_id": "M02"
+          },
+          "decision_basis": "补查后仍缺信息",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "status": "waiting_information",
+              "required_items": [
+                {
+                  "code": "missing_metadata",
+                  "severity": "missing",
+                  "message": "缺少字段：title"
+                }
+              ]
+            }
+          },
+          "next_action": "finish"
+        },
+        {
+          "step": 5,
+          "action": "finish",
+          "tool_params": {
+            "material_id": "M02"
+          },
+          "decision_basis": "本轮已有明确结果",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "status": "waiting_information",
+              "published": false
+            }
+          },
+          "next_action": null
+        }
+      ]
+    }
+  ],
+  "database_row_counts_before": [
+    0
+  ],
+  "database_rows_after": [],
+  "checks": {
+    "run_status": true,
+    "review_status": true,
+    "draft_count": true,
+    "not_published": true
+  },
+  "passed": true
+}

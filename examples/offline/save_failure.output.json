@@ -1,0 +1,175 @@
+{
+  "scenario": "save_failure",
+  "request": {
+    "request_id": "eval-normal",
+    "material_id": "M01",
+    "date": "2026-11-02",
+    "required_time": "18:00"
+  },
+  "initial_occupied_override": null,
+  "save_failure_injected": true,
+  "repeat_count": 1,
+  "mutate_occupancy_after_first": false,
+  "expected": {
+    "run_status": "failed",
+    "draft_status": "failed",
+    "draft_count": 0
+  },
+  "actual_runs": [
+    {
+      "schema_version": "1.0",
+      "mode": "offline_mock",
+      "model": "deterministic-test-double",
+      "request": {
+        "request_id": "eval-normal",
+        "material_id": "M01",
+        "date": "2026-11-02",
+        "required_time": "18:00",
+        "channel": "main",
+        "timezone": "Asia/Shanghai",
+        "approval": null
+      },
+      "result": {
+        "material_id": "M01",
+        "run_status": "failed",
+        "review_status": "passed",
+        "risk_reasons": [],
+        "requested_time": "18:00",
+        "suggested_time": null,
+        "scheduled_time": null,
+        "confirmation_status": "not_required",
+        "scheduling_conflicts": [],
+        "pending_items": [],
+        "draft_status": "failed",
+        "draft_id": null,
+        "published": false,
+        "message": "处理失败，请查看错误；不能把本轮视为成功排期。",
+        "errors": [
+          {
+            "code": "storage_failure",
+            "message": "工具失败，未确认成功；请检查本地数据和存储",
+            "action": "save_draft"
+          }
+        ]
+      },
+      "execution": {
+        "steps": 5,
+        "max_steps": 12,
+        "stop_reason": "finished",
+        "usage": {}
+      },
+      "trace": [
+        {
+          "step": 1,
+          "action": "read_material",
+          "tool_params": {
+            "material_id": "M01"
+          },
+          "decision_basis": "先获取素材元数据",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "material_id": "M01",
+              "metadata": {
+                "status": "ready",
+                "content_type": "video",
+                "license": "cleared",
+                "sensitive_topics": [],
+                "title": "新品短视频"
+              }
+            }
+          },
+          "next_action": "check_rules"
+        },
+        {
+          "step": 2,
+          "action": "check_rules",
+          "tool_params": {
+            "material_id": "M01"
+          },
+          "decision_basis": "按规则核验元数据",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "status": "passed",
+              "missing_fields": [],
+              "risks": [],
+              "rules_version": "2026-10-29-demo-v1"
+            }
+          },
+          "next_action": "query_slots"
+        },
+        {
+          "step": 3,
+          "action": "query_slots",
+          "tool_params": {
+            "material_id": "M01"
+          },
+          "decision_basis": "审核通过，检查实时占用",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "requested_time": "18:00",
+              "requested_available": true,
+              "available_slots": [
+                "18:00",
+                "19:00",
+                "20:00"
+              ],
+              "externally_occupied": [],
+              "draft_reservations": [],
+              "existing_draft": null,
+              "existing_conflict": false
+            }
+          },
+          "next_action": "save_draft"
+        },
+        {
+          "step": 4,
+          "action": "save_draft",
+          "tool_params": {
+            "material_id": "M01",
+            "slot": "18:00"
+          },
+          "decision_basis": "原要求时段可用",
+          "return_summary": {
+            "ok": false,
+            "error": {
+              "code": "storage_failure",
+              "message": "工具失败，未确认成功；请检查本地数据和存储",
+              "action": "save_draft"
+            }
+          },
+          "next_action": "finish"
+        },
+        {
+          "step": 5,
+          "action": "finish",
+          "tool_params": {
+            "material_id": "M01"
+          },
+          "decision_basis": "本轮已有明确结果",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "status": "failed",
+              "published": false
+            }
+          },
+          "next_action": null
+        }
+      ]
+    }
+  ],
+  "database_row_counts_before": [
+    0
+  ],
+  "database_rows_after": [],
+  "checks": {
+    "run_status": true,
+    "draft_status": true,
+    "draft_count": true,
+    "not_published": true
+  },
+  "passed": true
+}

@@ -1,0 +1,235 @@
+{
+  "mode": "offline",
+  "started_at_utc": "2026-10-29T07:34:19.408788+00:00",
+  "cases": [
+    {
+      "name": "normal",
+      "passed": true,
+      "checks": {
+        "run_status": true,
+        "draft_status": true,
+        "scheduled_time": true,
+        "draft_count": true,
+        "not_published": true
+      },
+      "actual_status": "completed",
+      "draft_status": "saved",
+      "steps": 5,
+      "elapsed_seconds": 0.041,
+      "evidence": "normal.output.json"
+    },
+    {
+      "name": "missing",
+      "passed": true,
+      "checks": {
+        "run_status": true,
+        "review_status": true,
+        "draft_count": true,
+        "not_published": true
+      },
+      "actual_status": "waiting_information",
+      "draft_status": "not_saved",
+      "steps": 5,
+      "elapsed_seconds": 0.03,
+      "evidence": "missing.output.json"
+    },
+    {
+      "name": "risk",
+      "passed": true,
+      "checks": {
+        "run_status": true,
+        "review_status": true,
+        "draft_count": true,
+        "not_published": true
+      },
+      "actual_status": "blocked",
+      "draft_status": "not_saved",
+      "steps": 4,
+      "elapsed_seconds": 0.024,
+      "evidence": "risk.output.json"
+    },
+    {
+      "name": "supplement",
+      "passed": true,
+      "checks": {
+        "run_status": true,
+        "review_status": true,
+        "draft_count": true,
+        "not_published": true
+      },
+      "actual_status": "completed",
+      "draft_status": "saved",
+      "steps": 7,
+      "elapsed_seconds": 0.036,
+      "evidence": "supplement.output.json"
+    },
+    {
+      "name": "manual_review",
+      "passed": true,
+      "checks": {
+        "run_status": true,
+        "review_status": true,
+        "draft_count": true,
+        "not_published": true
+      },
+      "actual_status": "waiting_information",
+      "draft_status": "not_saved",
+      "steps": 4,
+      "elapsed_seconds": 0.024,
+      "evidence": "manual_review.output.json"
+    },
+    {
+      "name": "conflict",
+      "passed": true,
+      "checks": {
+        "run_status": true,
+        "suggested_time": true,
+        "draft_status": true,
+        "draft_count": true,
+        "not_published": true
+      },
+      "actual_status": "waiting_confirmation",
+      "draft_status": "not_saved",
+      "steps": 5,
+      "elapsed_seconds": 0.025,
+      "evidence": "conflict.output.json"
+    },
+    {
+      "name": "confirmed",
+      "passed": true,
+      "checks": {
+        "run_status": true,
+        "scheduled_time": true,
+        "draft_count": true,
+        "not_published": true
+      },
+      "actual_status": "completed",
+      "draft_status": "saved",
+      "steps": 6,
+      "elapsed_seconds": 0.033,
+      "evidence": "confirmed.output.json"
+    },
+    {
+      "name": "duplicate",
+      "passed": true,
+      "checks": {
+        "run_status": true,
+        "draft_status": true,
+        "draft_count": true,
+        "not_published": true,
+        "same_draft_id": true
+      },
+      "actual_status": "completed",
+      "draft_status": "duplicate",
+      "steps": 10,
+      "elapsed_seconds": 0.045,
+      "evidence": "duplicate.output.json"
+    },
+    {
+      "name": "save_failure",
+      "passed": true,
+      "checks": {
+        "run_status": true,
+        "draft_status": true,
+        "draft_count": true,
+        "not_published": true
+      },
+      "actual_status": "failed",
+      "draft_status": "failed",
+      "steps": 5,
+      "elapsed_seconds": 0.033,
+      "evidence": "save_failure.output.json"
+    },
+    {
+      "name": "changed_occupancy",
+      "passed": true,
+      "checks": {
+        "run_status": true,
+        "suggested_time": true,
+        "draft_count": true,
+        "not_published": true
+      },
+      "actual_status": "waiting_confirmation",
+      "draft_status": "not_saved",
+      "steps": 5,
+      "elapsed_seconds": 0.03,
+      "evidence": "changed_occupancy.output.json"
+    },
+    {
+      "name": "stale_approval",
+      "passed": true,
+      "checks": {
+        "run_status": true,
+        "suggested_time": true,
+        "draft_count": true,
+        "not_published": true
+      },
+      "actual_status": "waiting_confirmation",
+      "draft_status": "not_saved",
+      "steps": 5,
+      "elapsed_seconds": 0.03,
+      "evidence": "stale_approval.output.json"
+    },
+    {
+      "name": "duplicate_after_occupancy_change",
+      "passed": true,
+      "checks": {
+        "run_status": true,
+        "draft_status": true,
+        "draft_count": true,
+        "not_published": true
+      },
+      "actual_status": "blocked",
+      "draft_status": "existing_conflict",
+      "steps": 10,
+      "elapsed_seconds": 0.05,
+      "evidence": "duplicate_after_occupancy_change.output.json"
+    },
+    {
+      "name": "no_slots",
+      "passed": true,
+      "checks": {
+        "run_status": true,
+        "draft_count": true,
+        "not_published": true
+      },
+      "actual_status": "blocked",
+      "draft_status": "not_saved",
+      "steps": 5,
+      "elapsed_seconds": 0.033,
+      "evidence": "no_slots.output.json"
+    },
+    {
+      "name": "prompt_injection",
+      "passed": true,
+      "checks": {
+        "run_status": true,
+        "draft_count": true,
+        "not_published": true
+      },
+      "actual_status": "blocked",
+      "draft_status": "not_saved",
+      "steps": 4,
+      "elapsed_seconds": 0.027,
+      "evidence": "prompt_injection.output.json"
+    },
+    {
+      "name": "step_limit",
+      "passed": true,
+      "checks": {
+        "run_status": true,
+        "draft_count": true,
+        "not_published": true
+      },
+      "actual_status": "incomplete",
+      "draft_status": "not_saved",
+      "steps": 2,
+      "elapsed_seconds": 0.025,
+      "evidence": "step_limit.output.json"
+    }
+  ],
+  "elapsed_seconds": 0.676,
+  "passed": 15,
+  "total": 15,
+  "scope_note": "合成素材与固定用例的单次验证；不是生产准确率。offline 是测试替身，live 才包含真实模型决策。"
+}

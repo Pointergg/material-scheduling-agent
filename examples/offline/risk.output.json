@@ -1,0 +1,163 @@
+{
+  "scenario": "risk",
+  "request": {
+    "request_id": "eval-normal",
+    "material_id": "M03",
+    "date": "2026-11-02",
+    "required_time": "18:00"
+  },
+  "initial_occupied_override": null,
+  "save_failure_injected": false,
+  "repeat_count": 1,
+  "mutate_occupancy_after_first": false,
+  "expected": {
+    "run_status": "blocked",
+    "review_status": "blocked",
+    "draft_count": 0
+  },
+  "actual_runs": [
+    {
+      "schema_version": "1.0",
+      "mode": "offline_mock",
+      "model": "deterministic-test-double",
+      "request": {
+        "request_id": "eval-normal",
+        "material_id": "M03",
+        "date": "2026-11-02",
+        "required_time": "18:00",
+        "channel": "main",
+        "timezone": "Asia/Shanghai",
+        "approval": null
+      },
+      "result": {
+        "material_id": "M03",
+        "run_status": "blocked",
+        "review_status": "blocked",
+        "risk_reasons": [
+          {
+            "code": "medical_claim",
+            "severity": "block",
+            "message": "未经核验的医疗功效宣称，禁止排期"
+          }
+        ],
+        "requested_time": "18:00",
+        "suggested_time": null,
+        "scheduled_time": null,
+        "confirmation_status": "not_required",
+        "scheduling_conflicts": [],
+        "pending_items": [],
+        "draft_status": "not_saved",
+        "draft_id": null,
+        "published": false,
+        "message": "处理被阻断，请检查风险、冲突或工具错误；未发布。",
+        "errors": []
+      },
+      "execution": {
+        "steps": 4,
+        "max_steps": 12,
+        "stop_reason": "finished",
+        "usage": {}
+      },
+      "trace": [
+        {
+          "step": 1,
+          "action": "read_material",
+          "tool_params": {
+            "material_id": "M03"
+          },
+          "decision_basis": "先获取素材元数据",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "material_id": "M03",
+              "metadata": {
+                "status": "ready",
+                "content_type": "video",
+                "license": "cleared",
+                "sensitive_topics": [
+                  "medical_claim"
+                ],
+                "title": "未经验证的医疗宣传"
+              }
+            }
+          },
+          "next_action": "check_rules"
+        },
+        {
+          "step": 2,
+          "action": "check_rules",
+          "tool_params": {
+            "material_id": "M03"
+          },
+          "decision_basis": "按规则核验元数据",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "status": "blocked",
+              "missing_fields": [],
+              "risks": [
+                {
+                  "code": "medical_claim",
+                  "severity": "block",
+                  "message": "未经核验的医疗功效宣称，禁止排期"
+                }
+              ],
+              "rules_version": "2026-10-29-demo-v1"
+            }
+          },
+          "next_action": "block"
+        },
+        {
+          "step": 3,
+          "action": "block",
+          "tool_params": {
+            "material_id": "M03"
+          },
+          "decision_basis": "存在阻断风险",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "status": "blocked",
+              "risk_reasons": [
+                {
+                  "code": "medical_claim",
+                  "severity": "block",
+                  "message": "未经核验的医疗功效宣称，禁止排期"
+                }
+              ],
+              "errors": []
+            }
+          },
+          "next_action": "finish"
+        },
+        {
+          "step": 4,
+          "action": "finish",
+          "tool_params": {
+            "material_id": "M03"
+          },
+          "decision_basis": "本轮已有明确结果",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "status": "blocked",
+              "published": false
+            }
+          },
+          "next_action": null
+        }
+      ]
+    }
+  ],
+  "database_row_counts_before": [
+    0
+  ],
+  "database_rows_after": [],
+  "checks": {
+    "run_status": true,
+    "review_status": true,
+    "draft_count": true,
+    "not_published": true
+  },
+  "passed": true
+}

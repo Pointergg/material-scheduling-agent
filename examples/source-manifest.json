@@ -1,0 +1,13 @@
+{
+  "description": "SHA-256 of source files used for final local validation; final Git commit is the full source reference",
+  "files": {
+    "src\\__init__.py": "a23166818c50d800026337cc3751ec10b31ddbdbaaafd7dc619551975838fb08",
+    "src\\__main__.py": "79ee6f134c5c5193377cf9b189cbdcc3e2095e49ba9cec310114441c15a917c4",
+    "src\\agent.py": "89320444583ff937ccefd746914939323ea8c3bae7f1b8b0c9394b4c9ac4ce2a",
+    "src\\cli.py": "80bd2da0209b6355be3d685ada07b520be143243d07da5f0d04fea95342af652",
+    "src\\domain.py": "a485fe3573f507838bfbd1bc826a1562cea1e4e80a11d9548036e2b68f0efdd6",
+    "src\\planner.py": "553e06cc7648bbc5130c32ff17722dd8763e441b6f4dc5ad7d85846a7501b0fb",
+    "src\\storage.py": "0d09fbd88701fbffce857b90b05789729f67f2597043c8f8c59941c10048b727",
+    "src\\tools.py": "e2bad528080a14cbf5e835f52d92a054273adf5301bf096991cf08a97bdf8d70"
+  }
+}

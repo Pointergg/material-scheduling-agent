@@ -1,0 +1,16 @@
+{
+  "version": "2026-10-29-demo-v1",
+  "required_fields": [
+    "title",
+    "content_type",
+    "license",
+    "sensitive_topics"
+  ],
+  "blocked_topics": {
+    "medical_claim": "未经核验的医疗功效宣称，禁止排期",
+    "copyright_violation": "存在版权侵权风险"
+  },
+  "manual_review_topics": {
+    "brand_review": "品牌合作表述需负责人复核"
+  }
+}

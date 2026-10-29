@@ -1,0 +1,372 @@
+{
+  "scenario": "duplicate_after_occupancy_change",
+  "request": {
+    "request_id": "eval-normal",
+    "material_id": "M01",
+    "date": "2026-11-02",
+    "required_time": "18:00"
+  },
+  "initial_occupied_override": null,
+  "save_failure_injected": false,
+  "repeat_count": 2,
+  "mutate_occupancy_after_first": true,
+  "expected": {
+    "run_status": "blocked",
+    "draft_status": "existing_conflict",
+    "draft_count": 1
+  },
+  "actual_runs": [
+    {
+      "schema_version": "1.0",
+      "mode": "live_model",
+      "model": "deepseek-flash",
+      "request": {
+        "request_id": "eval-normal",
+        "material_id": "M01",
+        "date": "2026-11-02",
+        "required_time": "18:00",
+        "channel": "main",
+        "timezone": "Asia/Shanghai",
+        "approval": null
+      },
+      "result": {
+        "material_id": "M01",
+        "run_status": "completed",
+        "review_status": "passed",
+        "risk_reasons": [],
+        "requested_time": "18:00",
+        "suggested_time": "18:00",
+        "scheduled_time": "18:00",
+        "confirmation_status": "not_required",
+        "scheduling_conflicts": [],
+        "pending_items": [],
+        "draft_status": "saved",
+        "draft_id": "draft-a216a2f784a8e4064440",
+        "published": false,
+        "message": "草稿已保存或幂等复用；没有发布任何内容。",
+        "errors": []
+      },
+      "execution": {
+        "steps": 5,
+        "max_steps": 12,
+        "stop_reason": "finished",
+        "usage": {
+          "prompt_tokens": 9702,
+          "completion_tokens": 266,
+          "total_tokens": 9968
+        }
+      },
+      "trace": [
+        {
+          "step": 1,
+          "action": "read_material",
+          "tool_params": {
+            "material_id": "M01"
+          },
+          "decision_basis": "先读取素材元数据以进行审核",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "material_id": "M01",
+              "metadata": {
+                "status": "ready",
+                "content_type": "video",
+                "license": "cleared",
+                "sensitive_topics": [],
+                "title": "新品短视频"
+              }
+            }
+          },
+          "next_action": "check_rules"
+        },
+        {
+          "step": 2,
+          "action": "check_rules",
+          "tool_params": {
+            "material_id": "M01"
+          },
+          "decision_basis": "素材元数据完整，按业务规则审核",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "status": "passed",
+              "missing_fields": [],
+              "risks": [],
+              "rules_version": "2026-10-29-demo-v1"
+            }
+          },
+          "next_action": "query_slots"
+        },
+        {
+          "step": 3,
+          "action": "query_slots",
+          "tool_params": {
+            "material_id": "M01"
+          },
+          "decision_basis": "审核通过，查询 2026-11-02 主频道时段占用与草稿",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "requested_time": "18:00",
+              "requested_available": true,
+              "available_slots": [
+                "18:00",
+                "19:00",
+                "20:00"
+              ],
+              "externally_occupied": [],
+              "draft_reservations": [],
+              "existing_draft": null,
+              "existing_conflict": false
+            }
+          },
+          "next_action": "save_draft"
+        },
+        {
+          "step": 4,
+          "action": "save_draft",
+          "tool_params": {
+            "material_id": "M01",
+            "slot": "18:00"
+          },
+          "decision_basis": "审核通过且原时段 18:00 可用，无既有草稿冲突，保存草稿",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "status": "saved",
+              "saved": true,
+              "draft": {
+                "request_id": "eval-normal",
+                "material_id": "M01",
+                "date": "2026-11-02",
+                "required_time": "18:00",
+                "channel": "main",
+                "timezone": "Asia/Shanghai",
+                "draft_id": "draft-a216a2f784a8e4064440",
+                "scheduled_time": "18:00",
+                "status": "draft",
+                "published": false,
+                "approval": null,
+                "fingerprint": "7a32591752ed76db8da82c92194405361b167626dfa1d2a5784d4a8ca47aa699"
+              }
+            }
+          },
+          "next_action": "finish"
+        },
+        {
+          "step": 5,
+          "action": "finish",
+          "tool_params": {
+            "material_id": "M01"
+          },
+          "decision_basis": "审核通过，18:00 时段可用，草稿已保存（draft-a216a2f784a8e4064440），未发布",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "status": "completed",
+              "published": false
+            }
+          },
+          "next_action": null
+        }
+      ]
+    },
+    {
+      "schema_version": "1.0",
+      "mode": "live_model",
+      "model": "deepseek-flash",
+      "request": {
+        "request_id": "eval-normal",
+        "material_id": "M01",
+        "date": "2026-11-02",
+        "required_time": "18:00",
+        "channel": "main",
+        "timezone": "Asia/Shanghai",
+        "approval": null
+      },
+      "result": {
+        "material_id": "M01",
+        "run_status": "blocked",
+        "review_status": "passed",
+        "risk_reasons": [],
+        "requested_time": "18:00",
+        "suggested_time": "18:00",
+        "scheduled_time": "18:00",
+        "confirmation_status": "not_required",
+        "scheduling_conflicts": [
+          {
+            "code": "requested_time_unavailable",
+            "time": "18:00",
+            "available_slots": [
+              "19:00",
+              "20:00"
+            ],
+            "message": "原要求时段不可用；任何替代时段都需要具体授权"
+          }
+        ],
+        "pending_items": [
+          {
+            "type": "existing_draft_conflict",
+            "message": "旧草稿现已冲突，需要人工处理；未自动改期"
+          }
+        ],
+        "draft_status": "existing_conflict",
+        "draft_id": "draft-a216a2f784a8e4064440",
+        "published": false,
+        "message": "处理被阻断，请检查风险、冲突或工具错误；未发布。",
+        "errors": []
+      },
+      "execution": {
+        "steps": 5,
+        "max_steps": 12,
+        "stop_reason": "finished",
+        "usage": {
+          "prompt_tokens": 10581,
+          "completion_tokens": 264,
+          "total_tokens": 10845
+        }
+      },
+      "trace": [
+        {
+          "step": 1,
+          "action": "read_material",
+          "tool_params": {
+            "material_id": "M01"
+          },
+          "decision_basis": "先读取素材元数据以进行审核",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "material_id": "M01",
+              "metadata": {
+                "status": "ready",
+                "content_type": "video",
+                "license": "cleared",
+                "sensitive_topics": [],
+                "title": "新品短视频"
+              }
+            }
+          },
+          "next_action": "check_rules"
+        },
+        {
+          "step": 2,
+          "action": "check_rules",
+          "tool_params": {
+            "material_id": "M01"
+          },
+          "decision_basis": "素材元数据完整，按业务规则审核",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "status": "passed",
+              "missing_fields": [],
+              "risks": [],
+              "rules_version": "2026-10-29-demo-v1"
+            }
+          },
+          "next_action": "query_slots"
+        },
+        {
+          "step": 3,
+          "action": "query_slots",
+          "tool_params": {
+            "material_id": "M01"
+          },
+          "decision_basis": "审核通过，查询 2026-11-02 18:00 主频道时段占用与草稿情况",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "requested_time": "18:00",
+              "requested_available": false,
+              "available_slots": [
+                "19:00",
+                "20:00"
+              ],
+              "externally_occupied": [
+                "18:00"
+              ],
+              "draft_reservations": [],
+              "existing_draft": {
+                "request_id": "eval-normal",
+                "material_id": "M01",
+                "date": "2026-11-02",
+                "required_time": "18:00",
+                "channel": "main",
+                "timezone": "Asia/Shanghai",
+                "draft_id": "draft-a216a2f784a8e4064440",
+                "scheduled_time": "18:00",
+                "status": "draft",
+                "published": false,
+                "approval": null,
+                "fingerprint": "7a32591752ed76db8da82c92194405361b167626dfa1d2a5784d4a8ca47aa699"
+              },
+              "existing_conflict": true
+            }
+          },
+          "next_action": "block"
+        },
+        {
+          "step": 4,
+          "action": "block",
+          "tool_params": {
+            "material_id": "M01"
+          },
+          "decision_basis": "已存在草稿 draft-a216a2f784a8e4064440 占用 18:00 且该时段被外部占用，旧草稿冲突需人工处理",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "status": "blocked",
+              "risk_reasons": [],
+              "errors": []
+            }
+          },
+          "next_action": "finish"
+        },
+        {
+          "step": 5,
+          "action": "finish",
+          "tool_params": {
+            "material_id": "M01"
+          },
+          "decision_basis": "审核通过但已有草稿占用 18:00 且该时段被外部占用，已阻断并需人工处理旧草稿",
+          "return_summary": {
+            "ok": true,
+            "result": {
+              "status": "blocked",
+              "published": false
+            }
+          },
+          "next_action": null
+        }
+      ]
+    }
+  ],
+  "database_row_counts_before": [
+    0,
+    1
+  ],
+  "database_rows_after": [
+    {
+      "request_id": "eval-normal",
+      "material_id": "M01",
+      "date": "2026-11-02",
+      "required_time": "18:00",
+      "channel": "main",
+      "timezone": "Asia/Shanghai",
+      "draft_id": "draft-a216a2f784a8e4064440",
+      "scheduled_time": "18:00",
+      "status": "draft",
+      "published": false,
+      "approval": null,
+      "fingerprint": "7a32591752ed76db8da82c92194405361b167626dfa1d2a5784d4a8ca47aa699"
+    }
+  ],
+  "checks": {
+    "run_status": true,
+    "draft_status": true,
+    "draft_count": true,
+    "not_published": true
+  },
+  "passed": true
+}
