@@ -9,7 +9,7 @@
     "live_cases": 15
   },
   "remaining": [
-    "GitHub authentication and upload",
     "candidate personal review and numeric question identifier"
-  ]
+  ],
+  "delivery_repository": "https://github.com/Pointergg/material-scheduling-agent"
 }

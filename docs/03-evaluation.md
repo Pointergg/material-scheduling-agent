@@ -59,7 +59,7 @@ python -m scripts.generate_examples --mode offline --output runtime/eval-offline
 python -m scripts.generate_examples --mode live --output runtime/eval-live
 ```
 
-最后一条需要本地 API 配置并产生真实调用费用。CI 已配置 Windows/Linux 与 Python 3.11/3.12，但尚未上传 GitHub，因此不能声称远程 CI 已通过。
+最后一条需要本地 API 配置并产生真实调用费用。CI 已配置 Windows/Linux 与 Python 3.11/3.12，工作流为 `.github/workflows/tests.yml`；远端结果可在公开仓库 Actions 页核对。
 
 ## 失败修复与限制
 
